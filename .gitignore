@@ -1,0 +1,92 @@
+# ====================================
+# Java / Spring Boot
+# ====================================
+
+# Build output
+target/
+build/
+out/
+
+# Logs
+*.log
+*.out
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# =============================
+# IntelliJ IDEA
+# =============================
+.idea/
+*.iml
+*.iws
+
+# =============================
+# Maven / Gradle
+# =============================
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+.settings/
+dependency-reduced-pom.xml
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+gradle-app.setting
+gradle-app.properties
+
+# =============================
+# OS-specific files
+# =============================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# =============================
+# Environment / Config
+# =============================
+
+# Local environment variables
+.env
+*.local
+
+# IDE auto-generated run configs
+run/
+.vscode/
+
+# =============================
+# Docker / CI (if used)
+# =============================
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# =============================
+# Others (optional)
+# =============================
+
+# Compiled class files
+*.class
+
+# Package archives
+*.jar
+*.war
+*.ear
+
+# Backup files
+*~
+
+# Node modules (if front-end exists)
+node_modules/
+
+.DS_Store
