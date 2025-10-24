@@ -1,14 +1,14 @@
 package com.jehad.ticket.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.jehad.ticket.common.TicketBaseEntity;
+import com.jehad.ticket.event.Event;
+import com.jehad.ticket.ticket.Ticket;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,8 +17,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class User {
+@SuperBuilder
+public class User extends TicketBaseEntity {
     @Id
     @Column(name = "id", updatable = false, nullable = false, unique = true)
     private UUID id;
@@ -29,16 +29,34 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    //TODO : orgainzer events
-    //TODO : Attending events
-    //TODO : staffing events
+//  ###################################################
+//  #                                                 #
+//  #               RelationShips                     #
+//  #                                                 #
+//  ###################################################
+    @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
+    private List<Event> organizingEvents = new ArrayList<>();
 
-    @CreatedDate
-    @Column(name = "created_at", updatable = false, nullable = false)
-    private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @ManyToMany
+    @JoinTable(
+            name = "user_attending_events",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> attendingEvents = new ArrayList<>();
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_staffing_events",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> staffingEvents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "purchaser")
+    private List<Ticket> tickets = new ArrayList<>();
+
 
 }
