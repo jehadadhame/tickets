@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -35,4 +36,16 @@ public class QrCode extends TicketBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        QrCode qrCode = (QrCode) o;
+        return Objects.equals(getId(), qrCode.getId()) && getStatus() == qrCode.getStatus() && Objects.equals(getValue(), qrCode.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getStatus(), getValue());
+    }
 }

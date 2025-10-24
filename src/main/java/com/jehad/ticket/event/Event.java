@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -71,4 +72,15 @@ public class Event extends TicketBaseEntity {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<TicketType> ticketTypes = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(getId(), event.getId()) && Objects.equals(getName(), event.getName()) && Objects.equals(getVenue(), event.getVenue()) && getStatus() == event.getStatus() && Objects.equals(getStart(), event.getStart()) && Objects.equals(getEnd(), event.getEnd()) && Objects.equals(getSalesStart(), event.getSalesStart()) && Objects.equals(getSalesEnd(), event.getSalesEnd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getVenue(), getStatus(), getStart(), getEnd(), getSalesStart(), getSalesEnd());
+    }
 }

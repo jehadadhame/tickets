@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -46,4 +47,16 @@ public class Ticket extends TicketBaseEntity {
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private List<QrCode>  qrCodes = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(getId(), ticket.getId()) && getStatus() == ticket.getStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getStatus());
+    }
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -39,4 +40,15 @@ public class TicketValidation extends TicketBaseEntity {
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketValidation that = (TicketValidation) o;
+        return Objects.equals(getId(), that.getId()) && getStatus() == that.getStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getStatus());
+    }
 }
