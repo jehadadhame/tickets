@@ -28,4 +28,5 @@ public class EventController {
         EventDTO result =  eventService.createEvent(userId, event);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
 }
