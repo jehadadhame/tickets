@@ -18,7 +18,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 public class User extends TicketBaseEntity {
     @Id
     @Column(name = "id", updatable = false, nullable = false, unique = true)

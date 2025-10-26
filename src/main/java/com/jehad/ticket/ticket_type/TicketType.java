@@ -29,6 +29,9 @@ public class TicketType extends TicketBaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "price",  nullable = false)
     private double price;
 
@@ -51,11 +54,11 @@ public class TicketType extends TicketBaseEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         TicketType that = (TicketType) o;
-        return Double.compare(getPrice(), that.getPrice()) == 0 && getTotalAvailable() == that.getTotalAvailable() && Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName());
+        return Double.compare(getPrice(), that.getPrice()) == 0 && getTotalAvailable() == that.getTotalAvailable() && Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPrice(), getTotalAvailable());
+        return Objects.hash(getId(), getName(), getDescription(), getPrice(), getTotalAvailable());
     }
 }
