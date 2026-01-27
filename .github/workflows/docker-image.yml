@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
     tags:
       - "v*.*.*"   # v1.2.3
+
 
   pull_request:
     branches: [ "master" ]
